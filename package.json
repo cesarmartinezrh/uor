@@ -1,6 +1,15 @@
 {
   "name": "uor",
   "version": "0.1.0",
+  "author": "César Román Martínez Juárez",
+  "description": "Sistema informático para la administración de información dentro de la Unidad de Operación Regional",
+  "keywords": [
+    "UOR",
+    "Unidad de Operacion Regional",
+    "CONAFOR",
+    "CONAF",
+    "Comisión Nacional Forestal"
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,11 +17,16 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "repository": "github:cesarmartinezrh/uor",
+  "license": "MIT",
   "dependencies": {
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.8.0"
   }
 }
