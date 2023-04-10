@@ -52,19 +52,19 @@ export default function Home() {
             </p>
             {error && <p className='text-3xl text-red-600 '>{error}</p>}
             <form onSubmit={handleSubmit}>
-              <div class='relative flex bg-transparent text-gray-800 antialiased flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12 opacity-70'>
-                <div class='relative py-3 sm:w-96 mx-auto text-center'>
-                  <span class='mt-5 mx-3 text-center text-2xl text-gray-500 opacity-80'>
+              <div className='relative flex bg-transparent text-gray-800 antialiased flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12 opacity-70'>
+                <div className='relative py-3 sm:w-96 mx-auto text-center'>
+                  <span className='mt-5 mx-3 text-center text-2xl text-gray-500 opacity-80'>
                     Ingresar
                   </span>
-                  <div class='mt-4 bg-white shadow-md rounded-lg text-left'>
-                    <div class='h-2 bg-emerald-800 rounded-t-md'></div>
-                    <div class='px-8 py-6 '>
+                  <div className='mt-4 bg-white shadow-md rounded-lg text-left'>
+                    <div className='h-2 bg-emerald-800 rounded-t-md'></div>
+                    <div className='px-8 py-6 '>
                       <label class='block font-semibold'>Usuario:</label>
                       <input
                         type='text'
                         placeholder='Usuario'
-                        class='placeholder:italic placeholder:text-slate-400 border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-emerald-500 focus:ring-1 rounded-md'
+                        className='placeholder:italic placeholder:text-slate-400 border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-emerald-500 focus:ring-1 rounded-md'
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                       />
@@ -75,13 +75,13 @@ export default function Home() {
                         type='password'
                         placeholder='Contraseña'
                         value={password}
-                        class='placeholder:italic placeholder:text-slate-400 border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-emerald-500 focus:ring-1 rounded-md'
+                        className='placeholder:italic placeholder:text-slate-400 border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-emerald-500 focus:ring-1 rounded-md'
                         onChange={(e) => setPassword(e.target.value)}
                       />
-                      <div class='flex justify-between items-baseline'>
+                      <div className='flex justify-between items-baseline'>
                         <button
                           type='submit'
-                          class='w-full mt-10 bg-emerald-800 text-white py-2 px-6 rounded-md hover:bg-emerald-600 '
+                          className='w-full mt-10 bg-emerald-800 text-white py-2 px-6 rounded-md hover:bg-emerald-600 '
                         >
                           Entrar
                         </button>
