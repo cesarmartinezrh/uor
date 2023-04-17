@@ -1,10 +1,29 @@
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { getSession, getProviders } from 'next-auth/react'
 
-export default function Home() {
+import Layout from '../components/layout'
+
+export default function Home({ providers, session }) {
+  console.log(providers, session)
   return (
-    <>
-      <h1>Hello world</h1>
-    </>
+    <Layout>
+      <div>Home</div>
+    </Layout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { req } = context
+  const session = await getSession({ req })
+  const providers = await getProviders()
+  if (!session) {
+    return {
+      redirect: { destination: '/api/auth/signin' }
+    }
+  }
+  return {
+    props: {
+      providers,
+      session
+    }
+  }
 }
