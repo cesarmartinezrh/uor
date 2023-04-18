@@ -1,12 +1,25 @@
 import { getSession, getProviders } from 'next-auth/react'
 
+import TextInput from '../components/textinput'
 import Layout from '../components/layout'
+import Select from '../components/select'
+import options from '../data/captec.json'
 
-export default function Home({ providers, session }) {
-  console.log(providers, session)
+export default function Home({ sessionData }) {
+  const { num_emp, puesto, nombre_completo } = sessionData.session.user.data
+
   return (
     <Layout>
-      <div>Home</div>
+      <div className='w-full flex flex-col gap-2 p-4 items-center'>
+        <div>Bienvenido: {nombre_completo}</div>
+        <form className='w-full grid grid-rows-1 gap-2'>
+          <TextInput placeholder={'Asesor Técnico'} name={'nombre'} />
+          <TextInput placeholder={'Razón Social'} name={'rs'} />
+          <TextInput placeholder={'Estado'} name={'estado'} />
+          <TextInput placeholder={'RFN'} name={'rfn'} />
+          <Select options={options} />
+        </form>
+      </div>
     </Layout>
   )
 }
@@ -14,7 +27,8 @@ export default function Home({ providers, session }) {
 export async function getServerSideProps(context) {
   const { req } = context
   const session = await getSession({ req })
-  const providers = await getProviders()
+  const sessionData = { session }
+
   if (!session) {
     return {
       redirect: { destination: '/api/auth/signin' }
@@ -22,8 +36,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      providers,
-      session
+      sessionData
     }
   }
 }

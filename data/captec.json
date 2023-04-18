@@ -1,54 +1,54 @@
 [
   {
-    "id": 0,
-    "captec": "Seleccione una opción..."
+    "key": 0,
+    "description": "Seleccione una opción..."
   },
   {
-    "id": 1,
-    "captec": "Desarrollo De La Cadena Productiva"
+    "key": 1,
+    "description": "Desarrollo De La Cadena Productiva"
   },
   {
-    "id": 2,
-    "captec": "Estudios Forestales"
+    "key": 2,
+    "description": "Estudios Forestales"
   },
   {
-    "id": 3,
-    "captec": "Fira"
+    "key": 3,
+    "description": "Fira"
   },
   {
-    "id": 4,
-    "captec": "Fnd"
+    "key": 4,
+    "description": "Fnd"
   },
   {
-    "id": 5,
-    "captec": "Fortalecimiento Del Capital Humano"
+    "key": 5,
+    "description": "Fortalecimiento Del Capital Humano"
   },
   {
-    "id": 6,
-    "captec": "Fortalecimiento Del Capital Social"
+    "key": 6,
+    "description": "Fortalecimiento Del Capital Social"
   },
   {
-    "id": 7,
-    "captec": "Institucion Extensionista"
+    "key": 7,
+    "description": "Institucion Extensionista"
   },
   {
-    "id": 8,
-    "captec": "Reforestacion Y Suelos"
+    "key": 8,
+    "description": "Reforestacion Y Suelos"
   },
   {
-    "id": 9,
-    "captec": "Saneamiento Forestal"
+    "key": 9,
+    "description": "Saneamiento Forestal"
   },
   {
-    "id": 10,
-    "captec": "Servicios Ambientales"
+    "key": 10,
+    "description": "Servicios Ambientales"
   },
   {
-    "id": 13,
-    "captec": "Silvicultura"
+    "key": 13,
+    "description": "Silvicultura"
   },
   {
-    "id": 19,
-    "captec": "Sistemas De Informacion Geografica"
+    "key": 19,
+    "description": "Sistemas De Informacion Geografica"
   }
 ]

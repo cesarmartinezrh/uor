@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import asesoresdata from '../../data/general.json'
 
 export default function handler(req, res) {
@@ -7,31 +8,14 @@ export default function handler(req, res) {
   }
 
   const filter = req.query ?? {}
-
-  const { estado, rs, ct, nombre, folio, rfn } = filter
-  const filteredData = asesoresdata.filter(
-    (asesor) =>
-      asesor.estado.trim().toLocaleLowerCase() ===
-        estado.trim().toLocaleLowerCase() &&
-      asesor.rs
+  const filteredData = asesoresdata.filter((asesor) => {
+    return Object.keys(filter).every((key) => {
+      return asesor[key]
         .trim()
         .toLocaleLowerCase()
-        .includes(rs?.trim().toLocaleLowerCase()) &&
-      asesor.ct
-        .trim()
-        .toLocaleLowerCase()
-        .includes(ct?.trim().toLocaleLowerCase()) &&
-      asesor.nombre
-        .trim()
-        .toLocaleLowerCase()
-        .includes(nombre?.trim().toLocaleLowerCase()) &&
-      asesor.folio
-        .trim()
-        .toLocaleLowerCase()
-        .includes(folio?.trim().toLocaleLowerCase()) &&
-      asesor.estado.trim().toLocaleLowerCase() ===
-        estado.trim().toLocaleLowerCase()
-  )
+        .includes(filter[key].trim().toLocaleLowerCase())
+    })
+  })
 
   res.status(200).json(filteredData)
 }
