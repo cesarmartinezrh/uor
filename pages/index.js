@@ -7,10 +7,9 @@ import Layout from '../components/layout'
 import Select from '../components/select'
 import options from '../data/captec.json'
 
-export default function Home({ sessionData }) {
+export default function Home() {
   const router = useRouter()
   /*  const { num_emp, puesto, nombre_completo } = sessionData.session.user.data */
-  console.log(sessionData)
   const { data, status } = useSession()
 
   const loading = status === 'loading'

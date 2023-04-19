@@ -34,7 +34,7 @@ const authOptions = {
             })
           }
         )
-        const user = await res
+        const user = await res.json()
         if (res.status === 200 && user) {
           return user
         } else return null
