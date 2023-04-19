@@ -115,6 +115,12 @@ export async function getServerSideProps(context) {
   const session = await getSession({ req })
   const providers = await getProviders()
 
+  if (session) {
+    return {
+      redirect: { destination: '/' }
+    }
+  }
+
   return {
     props: {
       providers,

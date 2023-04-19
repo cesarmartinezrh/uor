@@ -1,14 +1,15 @@
 import axios from 'axios'
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Only POST requests allowed' })
-  }
-
+const handler = async (req, res) => {
   try {
+    if (req.method !== 'POST') {
+      res.status(405).send({ message: 'Only POST requests allowed' })
+      return
+    }
+    const loginInfo = JSON.parse(JSON.stringify(req.body))
     const response = await axios.post(
       'http://187.218.23.71/API_REST/api/autorizacion',
-      req.body,
+      loginInfo,
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -19,11 +20,15 @@ export default async function handler(req, res) {
     const { data: user } = await response
 
     if (!user) {
-      return res.status(404).json({ message: 'User does not exist!' })
+      res.status(404).send({ message: 'User does not exist!' })
+      return
     }
 
-    return res.status(200).json(user)
+    res.status(200).json(user)
   } catch (error) {
-    return res.status(500).json({ message: `${error.message}` })
+    res.status(405).send({ message: `${error.message}` })
+    return
   }
 }
+
+export default handler
