@@ -18,7 +18,7 @@ const SignIn = ({ providers, session }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    signIn('credentials', { redirect: '/', loginInfo })
+    signIn('credentials', { loginInfo, callbackUrl: '/' })
   }
 
   return (
