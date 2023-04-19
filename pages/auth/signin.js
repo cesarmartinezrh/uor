@@ -1,9 +1,15 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { getProviders, getSession, signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Logo from '../../public/assets/logo.png'
 
-const SignIn = ({ providers, session }) => {
+const SignIn = () => {
+  const { status } = useSession()
+  const router = useRouter()
+  if (status === 'authenticated') {
+    router.replace('/')
+  }
   const [loginInfo, setLoginInfo] = useState({
     usuario: '',
     password: ''
@@ -20,7 +26,6 @@ const SignIn = ({ providers, session }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(loginInfo)
     if (loginInfo.usuario.length < 8) {
       setError('Usuario inválido')
       return
@@ -35,7 +40,13 @@ const SignIn = ({ providers, session }) => {
       redirect: false
     })
 
-    console.log(res)
+    if (res.ok) {
+      setTimeout(() => {
+        router.push('/')
+      }, 1000)
+    } else {
+      setError('Credenciales inválidas')
+    }
   }
 
   return (
@@ -118,15 +129,3 @@ const SignIn = ({ providers, session }) => {
 }
 
 export default SignIn
-export async function getServerSideProps(context) {
-  const { req } = context
-  const session = await getSession({ req })
-  const providers = await getProviders()
-
-  return {
-    props: {
-      providers,
-      session
-    }
-  }
-}

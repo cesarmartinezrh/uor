@@ -6,8 +6,9 @@ const authOptions = {
   session: {
     strategy: 'jwt'
   },
-  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   // Configure one or more authentication providers
+  //site: 'https://uor.cnf.gob.mx/',
   site: 'https://uor.cnf.gob.mx/',
   providers: [
     CredentialsProvider({
@@ -20,16 +21,18 @@ const authOptions = {
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {},
       async authorize(credentials, req) {
-        const res = await axios.post(
-          'https://uor.cnf.gob.mx/api/auth/login',
-          credentials,
-          {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            }
-          }
-        )
-        const user = await res.json()
+        const { usuario, password } = credentials
+        const res = await fetch('https://uor.cnf.gob.mx/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            usuario,
+            password
+          })
+        })
+        const user = await res
         if (res.status === 200 && user) {
           return user
         } else return null
@@ -44,9 +47,6 @@ const authOptions = {
       // Send properties to the client, like an access_token from a provider.
       session.user = token
       return session
-    },
-    async redirect({ url, baseUrl }) {
-      return baseUrl
     }
   },
   pages: {
