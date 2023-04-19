@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { getProviders, getSession, signIn } from 'next-auth/react'
 import Logo from '../../../public/assets/logo.png'
 
-const Signin = ({ providers, session }) => {
+const SignIn = ({ providers, session }) => {
   const [loginInfo, setLoginInfo] = useState({
     usuario: '',
     password: ''
@@ -11,11 +11,9 @@ const Signin = ({ providers, session }) => {
 
   const [error, setError] = useState(null)
 
-  const handleInputChange = (e) => {
-    setLoginInfo({
-      ...loginInfo,
-      [e.target.name]: e.target.value
-    })
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setLoginInfo((prevState) => ({ ...prevState, [name]: value }))
   }
 
   const handleSubmit = (e) => {
@@ -61,7 +59,7 @@ const Signin = ({ providers, session }) => {
                 autoFocus
                 name='usuario'
                 className='px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-emerald-700'
-                onChange={handleInputChange}
+                onChange={handleChange}
               />
             </div>
             <div className='flex flex-col space-y-1'>
@@ -78,7 +76,7 @@ const Signin = ({ providers, session }) => {
                 id='password'
                 name='password'
                 className='px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-emerald-700'
-                onChange={handleInputChange}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -102,16 +100,12 @@ const Signin = ({ providers, session }) => {
   )
 }
 
-export default Signin
+export default SignIn
 export async function getServerSideProps(context) {
   const { req } = context
   const session = await getSession({ req })
   const providers = await getProviders()
-  if (session) {
-    return {
-      redirect: { destination: '/' }
-    }
-  }
+
   return {
     props: {
       providers,
