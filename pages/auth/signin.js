@@ -34,21 +34,18 @@ const SignIn = () => {
       setError('Contraseña inválido')
       return
     }
-    try {
-      const res = await signIn('credentials', {
-        usuario,
-        password,
-        redirect: false
-      })
-      if (res.ok) {
-        setTimeout(() => {
-          router.push('/')
-        }, 1000)
-      } else {
-        setError('Credenciales inválidas')
-      }
-    } catch (err) {
-      throw new Error(err)
+    const res = await signIn('credentials', {
+      usuario,
+      password,
+      redirect: false
+    })
+    if (res.ok) {
+      setTimeout(() => {
+        router.push('/')
+      }, 1000)
+    } else {
+      console.log(res)
+      setError('Credenciales inválidas')
     }
   }
 

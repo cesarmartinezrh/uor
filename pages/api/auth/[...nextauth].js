@@ -20,24 +20,28 @@ const authOptions = {
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {},
       async authorize(credentials, req) {
-        const { usuario, password } = credentials
-        const res = await fetch(
-          'http://187.218.23.71/API_REST/api/autorizacion',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              usuario,
-              password
-            })
-          }
-        )
-        const user = await res.json()
-        if (res.status === 200 && user) {
-          return user
-        } else return null
+        try {
+          const { usuario, password } = credentials
+          const loginInfo = new URLSearchParams()
+          loginInfo.append('usuario', usuario)
+          loginInfo.append('password', password)
+
+          const response = await axios.post(
+            'http://187.218.23.71/API_REST/api/autorizacion',
+            loginInfo.toString(),
+            {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            }
+          )
+          const user = response.data
+          if (response.status === 200 && user) {
+            return user
+          } else return null
+        } catch (error) {
+          console.error(error)
+        }
       }
     })
   ],
