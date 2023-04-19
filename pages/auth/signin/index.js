@@ -18,6 +18,14 @@ const SignIn = ({ providers, session }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (loginInfo.usuario.length < 8) {
+      setError('Usuario inválido')
+      return
+    }
+    if (loginInfo.password.length < 8) {
+      setError('Contraseña inválido')
+      return
+    }
     signIn('credentials', loginInfo)
   }
 
