@@ -20,7 +20,7 @@ const Signin = ({ providers, session }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    signIn('credentials', loginInfo)
+    signIn('credentials', loginInfo, { callbackUrl: '/' })
   }
 
   return (

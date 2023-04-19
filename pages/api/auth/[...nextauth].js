@@ -52,6 +52,9 @@ export const authOptions = {
       // Send properties to the client, like an access_token from a provider.
       session.user = token
       return session
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl
     }
   },
   pages: {
