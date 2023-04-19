@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       }
     )
 
-    const { data: user } = response
+    const { data: user } = await response
 
     if (!user) {
       return res.status(404).json({ message: 'User does not exist!' })
