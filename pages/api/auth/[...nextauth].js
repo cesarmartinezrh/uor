@@ -6,7 +6,7 @@ const authOptions = {
   session: {
     strategy: 'jwt'
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
   // Configure one or more authentication providers
   //site: 'https://uor.cnf.gob.mx/',
   site: 'https://uor.cnf.gob.mx/',
