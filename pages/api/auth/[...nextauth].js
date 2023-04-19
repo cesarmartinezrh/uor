@@ -3,7 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 export const authOptions = {
   secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
   // Configure one or more authentication providers
-  site: 'https://uor.cnf.gob.mx',
+  site: 'https://uor.cnf.gob.mx/',
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
