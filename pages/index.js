@@ -18,7 +18,7 @@ export default function Home() {
     if (status === 'unauthenticated') {
       router.replace('/auth/signin')
     }
-  }, [status])
+  }, [status, router])
 
   if (status === 'authenticated')
     return (
