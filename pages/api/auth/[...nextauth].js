@@ -13,18 +13,6 @@ export const authOptions = {
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
-      credentials: {
-        usuario: {
-          label: 'Usuario',
-          type: 'text',
-          placeholder: 'Ingrese usuario'
-        },
-        password: {
-          label: 'Contraseña',
-          type: 'password',
-          placeholder: 'Ingrese su contraseña'
-        }
-      },
 
       async authorize(credentials, req) {
         const res = await axios.post(

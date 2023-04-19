@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 const handler = async (req, res) => {
+  if (req.method !== 'POST') {
+    res.status(405).send({ message: 'Only POST requests allowed' })
+    return
+  }
   try {
-    if (req.method !== 'POST') {
-      res.status(405).send({ message: 'Only POST requests allowed' })
-      return
-    }
     const loginInfo = JSON.parse(JSON.stringify(req.body))
     const response = await axios.post(
       'http://187.218.23.71/API_REST/api/autorizacion',
