@@ -3,6 +3,7 @@ import GithubProvider from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
 export const authOptions = {
   secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
+  site: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
