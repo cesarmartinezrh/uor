@@ -6,9 +6,12 @@ const authOptions = {
   session: {
     strategy: 'jwt'
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
   // Configure one or more authentication providers
-  site: process.env.PRODUCTION ? 'https://uor.cnf.gob.mx/' : 'localhost:3000',
+  site:
+    process.env.NEXT_PUBLIC_NODE_ENV === 'production'
+      ? 'https://uor.cnf.gob.mx/'
+      : 'localhost:3000',
   providers: [
     CredentialsProvider({
       type: 'credentials',
@@ -27,7 +30,7 @@ const authOptions = {
           loginInfo.append('password', password)
 
           const response = await axios.post(
-            process.env.USERS_API,
+            process.env.NEXT_PUBLIC_USERS_API,
             loginInfo.toString(),
             {
               headers: {
@@ -35,7 +38,9 @@ const authOptions = {
               }
             }
           )
+          console.log('works')
           const user = response.data
+          console.log(user)
           if (response.status === 200 && user) {
             return user
           } else {
