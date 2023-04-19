@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import axios from 'axios'
 export const authOptions = {
   secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
   // Configure one or more authentication providers
@@ -26,17 +27,15 @@ export const authOptions = {
       },
 
       async authorize(credentials, req) {
-        const { usuario, password } = credentials
-        const res = await fetch('https://uor.cnf.gob.mx/api/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            usuario,
-            password
-          })
-        })
+        const res = await axios.post(
+          'https://uor.cnf.gob.mx/api/auth/login',
+          credentials,
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          }
+        )
         const user = await res.json()
         if (res.status === 200 && user) {
           return user
