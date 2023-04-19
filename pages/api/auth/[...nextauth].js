@@ -38,9 +38,12 @@ const authOptions = {
           const user = response.data
           if (response.status === 200 && user) {
             return user
-          } else return null
+          } else {
+            return null
+          }
         } catch (error) {
           console.error(error)
+          return null
         }
       }
     })
@@ -51,7 +54,7 @@ const authOptions = {
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
-      session.user = token
+      session.user = user
       return session
     }
   },
