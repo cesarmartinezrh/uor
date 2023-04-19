@@ -8,7 +8,6 @@ const authOptions = {
   },
   secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
   // Configure one or more authentication providers
-  //site: 'https://uor.cnf.gob.mx/',
   site: 'https://uor.cnf.gob.mx/',
   providers: [
     CredentialsProvider({
@@ -22,16 +21,19 @@ const authOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const { usuario, password } = credentials
-        const res = await fetch('https://uor.cnf.gob.mx/api/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            usuario,
-            password
-          })
-        })
+        const res = await fetch(
+          'http://187.218.23.71/API_REST/api/autorizacion',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              usuario,
+              password
+            })
+          }
+        )
         const user = await res
         if (res.status === 200 && user) {
           return user

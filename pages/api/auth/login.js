@@ -4,6 +4,7 @@ const handler = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).send({ message: 'Only POST requests allowed' })
     return
+  } else {
   }
   try {
     const loginInfo = JSON.parse(JSON.stringify(req.body))
