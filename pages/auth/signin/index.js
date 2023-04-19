@@ -18,7 +18,7 @@ const SignIn = ({ providers, session }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    signIn('credentials', loginInfo)
+    signIn('credentials', { redirect: '/', loginInfo })
   }
 
   return (
@@ -85,7 +85,7 @@ const SignIn = ({ providers, session }) => {
                 className='w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-emerald-800 rounded-md shadow hover:bg-emerald-600 focus:outline-none focus:ring-emerald-200 focus:ring-4'
                 onClick={handleSubmit}
               >
-                Log in
+                Ingresar
               </button>
             </div>
             {error ? (
