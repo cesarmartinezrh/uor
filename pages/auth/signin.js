@@ -33,24 +33,29 @@ const SignIn = () => {
     }
     console.log('second')
     if (loginInfo.password.length < 8) {
-      setError('Contraseña inválido')
+      setError('Contraseña inválida')
       return
     }
-    console.log('third')
-    const res = await signIn('credentials', {
-      usuario,
-      password,
-      redirect: false
-    })
-    console.log(res, 'fourth')
-    if (res.ok) {
-      setError(null)
-      setTimeout(() => {
-        router.push('/')
-      }, 2000)
-    } else {
-      console.log('fifth')
-      setError('Credenciales inválidas')
+    try {
+      console.log('third')
+      const res = await signIn('credentials', {
+        usuario,
+        password,
+        redirect: false
+      })
+      console.log(res, 'fourth')
+      if (res.ok) {
+        setError(null)
+        setTimeout(() => {
+          router.push('/')
+        }, 2000)
+      } else {
+        console.log('fifth')
+        setError('Credenciales inválidas')
+      }
+    } catch (error) {
+      console.error(error)
+      throw error
     }
   }
 
