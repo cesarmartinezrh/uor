@@ -6,17 +6,9 @@ const authOptions = {
   session: {
     strategy: 'jwt'
   },
-  jwt: {
-    async encode({ token }) {
-      return jwt.sign(token, process.env.NEXT_PUBLIC_NEXTAUTH_SECRET)
-    },
-    async decode({ token }) {
-      return jwt.verify(token, process.env.NEXT_PUBLIC_NEXTAUTH_SECRET)
-    }
-  },
-  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   // Configure one or more authentication providers
-  site: 'https://uor.cnf.gob.mx/',
+  site: process.env.PRODUCTION ? 'https://uor.cnf.gob.mx/' : 'localhost:3000',
   providers: [
     CredentialsProvider({
       type: 'credentials',
@@ -35,7 +27,7 @@ const authOptions = {
           loginInfo.append('password', password)
 
           const response = await axios.post(
-            process.env.NEXT_PUBLIC_USERS_API,
+            process.env.USERS_API,
             loginInfo.toString(),
             {
               headers: {
@@ -62,7 +54,7 @@ const authOptions = {
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
-      session.user = user
+      session.user = token
       return session
     }
   },

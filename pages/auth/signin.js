@@ -26,24 +26,30 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log('first')
     if (loginInfo.usuario.length < 8) {
       setError('Usuario inválido')
       return
     }
+    console.log('second')
     if (loginInfo.password.length < 8) {
       setError('Contraseña inválido')
       return
     }
+    console.log('third')
     const res = await signIn('credentials', {
       usuario,
       password,
       redirect: false
     })
+    console.log(res, 'fourth')
     if (res.ok) {
+      setError(null)
       setTimeout(() => {
         router.push('/')
-      }, 1000)
+      }, 2000)
     } else {
+      console.log('fifth')
       setError('Credenciales inválidas')
     }
   }
