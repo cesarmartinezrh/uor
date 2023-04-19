@@ -6,6 +6,14 @@ const authOptions = {
   session: {
     strategy: 'jwt'
   },
+  jwt: {
+    async encode({ token }) {
+      return jwt.sign(token, process.env.NEXT_PUBLIC_NEXTAUTH_SECRET)
+    },
+    async decode({ token }) {
+      return jwt.verify(token, process.env.NEXT_PUBLIC_NEXTAUTH_SECRET)
+    }
+  },
   secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
   // Configure one or more authentication providers
   site: 'https://uor.cnf.gob.mx/',
