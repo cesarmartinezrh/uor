@@ -27,7 +27,7 @@ const authOptions = {
           loginInfo.append('password', password)
 
           const response = await axios.post(
-            'http://187.218.23.71/API_REST/api/autorizacion',
+            process.env.NEXT_PUBLIC_USERS_API,
             loginInfo.toString(),
             {
               headers: {

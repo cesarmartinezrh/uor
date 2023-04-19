@@ -44,7 +44,6 @@ const SignIn = () => {
         router.push('/')
       }, 1000)
     } else {
-      console.log(res)
       setError('Credenciales inválidas')
     }
   }
