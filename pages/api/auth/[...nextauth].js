@@ -27,7 +27,7 @@ export const authOptions = {
 
       async authorize(credentials, req) {
         const { usuario, password } = credentials
-        const res = await fetch('http://localhost:3000/api/auth/login', {
+        const res = await fetch('https://uor.cnf.gob.mx/api/auth/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
