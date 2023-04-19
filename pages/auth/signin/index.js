@@ -18,6 +18,7 @@ const SignIn = ({ providers, session }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(loginInfo)
     if (loginInfo.usuario.length < 8) {
       setError('Usuario inválido')
       return
