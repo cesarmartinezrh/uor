@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { getProviders, getSession, signIn } from 'next-auth/react'
-import Logo from '../../../public/assets/logo.png'
+import Logo from '../../public/assets/logo.png'
 
 const SignIn = ({ providers, session }) => {
   const [loginInfo, setLoginInfo] = useState({
     usuario: '',
     password: ''
   })
+
+  const { usuario, password } = loginInfo
 
   const [error, setError] = useState(null)
 
@@ -16,7 +18,7 @@ const SignIn = ({ providers, session }) => {
     setLoginInfo((prevState) => ({ ...prevState, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log(loginInfo)
     if (loginInfo.usuario.length < 8) {
@@ -27,7 +29,13 @@ const SignIn = ({ providers, session }) => {
       setError('Contraseña inválido')
       return
     }
-    signIn('credentials', loginInfo)
+    const res = await signIn('credentials', {
+      usuario,
+      password,
+      redirect: false
+    })
+
+    console.log(res)
   }
 
   return (
