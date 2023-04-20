@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: '/',
-  trustProxy: true
+  basePath: false
 }
 
 module.exports = nextConfig
