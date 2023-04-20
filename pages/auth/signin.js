@@ -5,19 +5,19 @@ import { signIn, useSession } from 'next-auth/react'
 import Logo from '../../public/assets/logo.png'
 
 const SignIn = () => {
-  const { status } = useSession()
-  const router = useRouter()
-  if (status === 'authenticated') {
-    router.replace('/')
-  }
   const [loginInfo, setLoginInfo] = useState({
     usuario: '',
     password: ''
   })
+  const [error, setError] = useState(null)
+  const { status } = useSession()
+  const router = useRouter()
+  if (status === 'authenticated') {
+    router.replace('/')
+    return
+  }
 
   const { usuario, password } = loginInfo
-
-  const [error, setError] = useState(null)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -31,7 +31,7 @@ const SignIn = () => {
       usuario,
       password
     })
-    if (result.error) {
+    if (result?.error) {
       alert(result.error)
     }
   }

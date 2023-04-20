@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { getSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 import TextInput from '../components/textinput'
 import Layout from '../components/layout'
 import Select from '../components/select'
 import options from '../data/captec.json'
 
-export default function Home(props) {
-  const { sessionData } = props
+export default function Home() {
   const router = useRouter()
-  const session = sessionData.session
   const [filter, setFilter] = useState({})
   const [asesores, setAsesores] = useState([])
+  const session = useSession()
 
   useEffect(() => {
-    if (session === null) {
-      router.push('/auth/signin')
+    if (session.status === 'unauthenticated') {
+      router.replace('/auth/signin')
     }
-  }, [])
+  }, [session.status])
 
   const handleChange = (e) => {
     const { value, name } = e.target
@@ -37,8 +36,7 @@ export default function Home(props) {
     }
   }
 
-  if (session !== null) {
-    const { nombre_completo, num_emp } = session.user.data
+  if (session.status === 'authenticated') {
     const searchInputs = [
       { placeholder: 'Asesor Técnico', name: 'nombre' },
       { placeholder: 'Razón Social', name: 'rs' },
@@ -48,7 +46,7 @@ export default function Home(props) {
     return (
       <Layout title={'Inicio'}>
         <div className='w-full flex flex-col gap-2 p-4 items-center'>
-          <div>Bienvenido: {nombre_completo}</div>
+          <div>Bienvenido: {'hi'}</div>
           <form
             onSubmit={handleSubmit}
             className='w-full grid grid-rows-1 gap-2'
@@ -72,16 +70,5 @@ export default function Home(props) {
   } else {
     // Return a loading spinner or message if the session is null
     return <div>Loading...</div>
-  }
-}
-
-export async function getServerSideProps(context) {
-  const { req } = context
-  const session = await getSession({ req })
-  const sessionData = { session }
-  return {
-    props: {
-      sessionData
-    }
   }
 }
