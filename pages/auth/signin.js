@@ -10,6 +10,8 @@ const SignIn = () => {
     password: ''
   })
 
+  const { usuario, password } = loginInfo
+
   const [error, setError] = useState(null)
 
   const handleChange = (e) => {
@@ -19,7 +21,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await signIn('credentials', { redirect: false, ...loginInfo })
+    await signIn('credentials', loginInfo)
   }
 
   return (
@@ -104,9 +106,10 @@ export default SignIn
 export async function getServerSideProps(context) {
   const { req } = context
   const session = await getSession({ req })
-  if (session) {
+  const sessionData = await session
+  if (sessionData) {
     return {
-      redirect: { destination: '/' }
+      redirect: { destination: '/', permanent: false }
     }
   }
   return {
