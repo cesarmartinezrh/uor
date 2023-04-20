@@ -1,19 +1,18 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import axios from 'axios'
-import FormData from 'form-data'
 
 const authOptions = {
   session: {
     strategy: 'jwt'
   },
-  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   jwt: {
-    secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     encryption: true
   },
   // Configure one or more authentication providers
-  site: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
+  site: process.env.NEXTAUTH_URL,
   providers: [
     CredentialsProvider({
       type: 'credentials',
@@ -27,7 +26,7 @@ const authOptions = {
       async authorize(credentials) {
         try {
           const response = await axios.post(
-            process.env.NEXT_PUBLIC_USERS_API,
+            process.env.USERS_API,
             credentials,
             {
               headers: {
