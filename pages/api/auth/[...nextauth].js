@@ -27,7 +27,7 @@ const authOptions = {
           loginInfo.append('password', password)
 
           const response = await axios.post(
-            process.env.NEXT_PUBLIC_USERS_API,
+            process.env.USERS_API,
             loginInfo.toString(),
             {
               headers: {
