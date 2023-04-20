@@ -6,12 +6,9 @@ const authOptions = {
   session: {
     strategy: 'jwt'
   },
-  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   // Configure one or more authentication providers
-  site:
-    process.env.NEXT_PUBLIC_NODE_ENV === 'production'
-      ? 'https://uor.cnf.gob.mx/'
-      : 'localhost:3000',
+  site: process.env.PRODUCTION ? 'https://uor.cnf.gob.mx/' : 'localhost:3000',
   providers: [
     CredentialsProvider({
       type: 'credentials',
@@ -23,23 +20,33 @@ const authOptions = {
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {},
       async authorize(credentials, req) {
-        return axios
-          .post(
+        try {
+          const { usuario, password } = credentials
+          const loginInfo = new URLSearchParams()
+          loginInfo.append('usuario', usuario)
+          loginInfo.append('password', password)
+
+          const response = await axios.post(
             process.env.NEXT_PUBLIC_USERS_API,
-            { usuario: credentials.usuario, password: credentials.password },
+            loginInfo.toString(),
             {
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
               }
             }
           )
-          .then((response) => {
-            return response.data
-          })
-          .catch((error) => {
-            console.log(error.response)
-            throw new Error(error.response.data.message)
-          })
+          console.log('works')
+          const user = response.data
+          console.log(user)
+          if (response.status === 200 && user) {
+            return user
+          } else {
+            return null
+          }
+        } catch (error) {
+          console.error(error)
+          return null
+        }
       }
     })
   ],
