@@ -36,27 +36,14 @@ const SignIn = () => {
       setError("Contraseña inválida");
       return;
     }
-    try {
-      console.log("third");
-      const res = await signIn("credentials", {
-        usuario,
-        password,
-        redirect: false,
-      });
-      console.log(res, "fourth");
-      if (res.ok) {
-        setError(null);
-        setTimeout(() => {
-          router.push("/");
-        }, 2000);
-      } else {
-        console.log("fifth");
-        setError("Credenciales inválidas");
-      }
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    console.log("third");
+    signIn("credentials", {
+      usuario,
+      password,
+      redirect: false,
+    })
+      .then((error) => console.error(error))
+      .catch((error) => console.error(error));
   };
 
   return (
