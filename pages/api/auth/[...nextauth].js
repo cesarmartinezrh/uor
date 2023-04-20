@@ -23,33 +23,23 @@ const authOptions = {
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {},
       async authorize(credentials, req) {
-        try {
-          const { usuario, password } = credentials
-          const loginInfo = new URLSearchParams()
-          loginInfo.append('usuario', usuario)
-          loginInfo.append('password', password)
-
-          const response = await axios.post(
+        return axios
+          .post(
             process.env.NEXT_PUBLIC_USERS_API,
-            loginInfo.toString(),
+            { usuario: credentials.usuario, password: credentials.password },
             {
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
               }
             }
           )
-          console.log('works')
-          const user = response.data
-          console.log(user)
-          if (response.status === 200 && user) {
-            return user
-          } else {
-            return null
-          }
-        } catch (error) {
-          console.error(error)
-          return null
-        }
+          .then((response) => {
+            return response.data
+          })
+          .catch((error) => {
+            console.log(error.response)
+            throw new Error(error.response.data.message)
+          })
       }
     })
   ],
