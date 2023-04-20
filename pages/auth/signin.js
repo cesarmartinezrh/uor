@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { signIn, getSession } from 'next-auth/react'
+import { signIn, getSession, getProviders } from 'next-auth/react'
 import Logo from '../../public/assets/logo.png'
 
 const SignIn = () => {
@@ -10,9 +10,10 @@ const SignIn = () => {
     password: ''
   })
 
-  const { usuario, password } = loginInfo
-
   const [error, setError] = useState(null)
+
+  const router = useRouter()
+  const { usuario, password } = loginInfo
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -106,14 +107,15 @@ export default SignIn
 export async function getServerSideProps(context) {
   const { req } = context
   const session = await getSession({ req })
-  const sessionData = await session
-  if (sessionData) {
+  const providers = await getProviders()
+  if (session) {
     return {
-      redirect: { destination: '/', permanent: false }
+      redirect: { destination: '/' }
     }
   }
   return {
     props: {
+      providers,
       session
     }
   }
