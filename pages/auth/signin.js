@@ -41,7 +41,7 @@ const SignIn = () => {
   return (
     <>
       <Header
-        title={Ingresar}
+        title={'Ingresar'}
         description={
           'Pantalla de inicio de sesión de la Unidad de Operación Regional'
         }
