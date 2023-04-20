@@ -27,7 +27,7 @@ export default function Home({ sessionData }) {
 
     try {
       const filteredData = await fetch(
-        `http://localhost:3000/api/getAsesores?${objParams}`
+        `https://uor.cnf.gob.mx/api/getAsesores?${objParams}`
       )
       const response = await filteredData.json()
       setAsesores(response)

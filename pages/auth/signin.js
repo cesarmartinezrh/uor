@@ -19,7 +19,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await signIn('credentials', loginInfo)
+    await signIn('credentials', { redirect: false, ...loginInfo })
   }
 
   return (
