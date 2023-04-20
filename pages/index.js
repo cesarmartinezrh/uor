@@ -29,7 +29,6 @@ export default function Home({ sessionData = { session: null } }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const objParams = `${new URLSearchParams(filter).toString()}`
-    console.log(objParams)
 
     try {
       const filteredData = await fetch(
@@ -84,8 +83,6 @@ export default function Home({ sessionData = { session: null } }) {
       </Layout>
     )
   }
-
-  return <p>Loading</p>
 }
 
 export async function getServerSideProps(context) {
