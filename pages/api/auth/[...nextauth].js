@@ -62,6 +62,9 @@ const authOptions = {
       session.user = token;
       return session;
     },
+    async signIn({ user, account, profile }) {
+      return Promise.resolve(true);
+    },
   },
   pages: {
     signIn: "/auth/signin",
