@@ -26,26 +26,13 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("first");
-    if (loginInfo.usuario.length < 8) {
-      setError("Usuario inválido");
-      return;
-    }
-    console.log("second");
-    if (loginInfo.password.length < 8) {
-      setError("Contraseña inválida");
-      return;
-    }
-    console.log("third");
-    const { error } = await signIn("credentials", {
+    const result = await signIn("credentials", {
+      redirect: false,
       usuario,
       password,
-      redirect: false,
     });
-    if (error) {
-      throw error;
-    } else {
-      router.replace("/");
+    if (result.error) {
+      alert(result.error);
     }
   };
 
