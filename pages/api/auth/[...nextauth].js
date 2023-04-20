@@ -35,10 +35,8 @@ const authOptions = {
               }
             }
           )
-          console.log('works')
           const user = response.data
-          console.log(user)
-          if (response.status === 200 && user) {
+          if (user.status === 200 && user) {
             return user
           } else {
             return null

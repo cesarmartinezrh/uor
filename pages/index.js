@@ -7,20 +7,19 @@ import Layout from '../components/layout'
 import Select from '../components/select'
 import options from '../data/captec.json'
 
-export default function Home({ sessionData }) {
+export default function Home({ sessionData = { session: null } }) {
   const router = useRouter()
-  const { num_emp, puesto, nombre_completo } = sessionData.session.user.data
+  const { session } = sessionData
 
   useEffect(() => {
-    if (!sessionData) {
+    if (session === null) {
       router.replace('/auth/signin')
     }
-  }, [sessionData, router])
+  }, [session, router])
 
   const [filter, setFilter] = useState({})
 
   const [asesores, setAsesores] = useState([])
-  console.log(asesores)
 
   const handleChange = (e) => {
     const { value, name } = e.target
@@ -43,7 +42,8 @@ export default function Home({ sessionData }) {
     }
   }
 
-  if (sessionData)
+  if (session) {
+    const { nombre_completo, num_emp } = session.user.data
     return (
       <Layout title={'Inicio'}>
         <div className='w-full flex flex-col gap-2 p-4 items-center'>
@@ -83,6 +83,8 @@ export default function Home({ sessionData }) {
         </div>
       </Layout>
     )
+  }
+
   return <p>Loading</p>
 }
 
