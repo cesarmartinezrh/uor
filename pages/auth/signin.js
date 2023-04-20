@@ -37,13 +37,16 @@ const SignIn = () => {
       return;
     }
     console.log("third");
-    signIn("credentials", {
+    const { error } = await signIn("credentials", {
       usuario,
       password,
       redirect: false,
-    })
-      .then((error) => console.error(error))
-      .catch((error) => console.error(error));
+    });
+    if (error) {
+      throw error;
+    } else {
+      router.replace("/");
+    }
   };
 
   return (
