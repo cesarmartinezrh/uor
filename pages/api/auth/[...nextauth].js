@@ -25,15 +25,19 @@ const authOptions = {
       credentials: {},
       async authorize(credentials) {
         try {
-          const response = await axios.post(
-            process.env.NEXT_PUBLIC_USERS_API,
-            credentials,
-            {
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-              },
-            }
-          );
+          const formData = new FormData();
+          for (const key in credentials) {
+            formData.append(key, credentials[key]);
+          }
+
+          const response = await fetch(process.env.NEXT_PUBLIC_USERS_API, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: formData,
+          });
+
           const user = response.data;
           if (user) {
             return user;
