@@ -16,9 +16,9 @@ export default function Home(props) {
 
   useEffect(() => {
     if (session === null) {
-      router.replace('/auth/signin')
+      router.push('/auth/signin')
     }
-  }, [session])
+  }, [])
 
   const handleChange = (e) => {
     const { value, name } = e.target
@@ -69,8 +69,10 @@ export default function Home(props) {
         </div>
       </Layout>
     )
+  } else {
+    // Return a loading spinner or message if the session is null
+    return <div>Loading...</div>
   }
-  return <p>Loading</p>
 }
 
 export async function getServerSideProps(context) {
