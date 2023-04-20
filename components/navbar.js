@@ -8,8 +8,7 @@ export default function Navbar() {
   const handleSignOut = async (e) => {
     e.preventDefault()
     signOut({
-      redirect: true,
-      callbackUrl: '/'
+      callbackUrl: 'credentials'
     })
   }
   return (
