@@ -1,5 +1,5 @@
 import Link from 'next/link'
-
+import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
 
 export default function Navbar() {
@@ -7,9 +7,8 @@ export default function Navbar() {
 
   const handleSignOut = async (e) => {
     e.preventDefault()
-    signOut({
-      callbackUrl: 'credentials'
-    })
+    await signOut({ redirect: false })
+    router.replace('/auth/signin')
   }
   return (
     <>
