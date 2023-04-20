@@ -7,7 +7,7 @@ import Layout from '../components/layout'
 import Select from '../components/select'
 import options from '../data/captec.json'
 
-export default function Home({ sessionData = { session: null } }) {
+export default function Home({ sessionData }) {
   const router = useRouter()
   const { session } = sessionData
 
