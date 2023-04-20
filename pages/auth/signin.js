@@ -106,11 +106,12 @@ const SignIn = () => {
 export default SignIn
 export async function getServerSideProps(context) {
   const { req } = context
+  console.log(req.headers.host)
   const session = await getSession({ req })
   const providers = await getProviders()
   if (session) {
     return {
-      redirect: { destination: '/' }
+      redirect: { destination: '/', parmanent: false }
     }
   }
   return {

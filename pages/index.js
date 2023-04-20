@@ -80,7 +80,10 @@ export async function getServerSideProps(context) {
   const sessionData = await session
   if (!session) {
     return {
-      redirect: { destination: '/api/auth/signin' }
+      redirect: {
+        permanent: false,
+        destination: '/auth/signin'
+      }
     }
   }
   return {
