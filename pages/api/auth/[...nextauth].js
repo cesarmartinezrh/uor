@@ -12,7 +12,7 @@ const authOptions = {
     encryption: true,
   },
   // Configure one or more authentication providers
-  site: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
+  site: process.env.NEXTAUTH_URL,
   providers: [
     CredentialsProvider({
       type: "credentials",
@@ -31,7 +31,7 @@ const authOptions = {
           loginInfo.append("password", password);
 
           const response = await axios.post(
-            process.env.NEXT_PUBLIC_USERS_API,
+            process.env.USERS_API,
             loginInfo.toString(),
             {
               headers: {
