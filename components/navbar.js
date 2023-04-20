@@ -7,8 +7,7 @@ export default function Navbar() {
 
   const handleSignOut = async (e) => {
     e.preventDefault()
-    await signOut({ redirect: false })
-    router.replace('/auth/signin')
+    signOut({ callbackUrl: 'https://uor.cnf.gob.mx/auth/signin' })
   }
   return (
     <>
