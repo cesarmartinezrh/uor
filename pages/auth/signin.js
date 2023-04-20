@@ -22,7 +22,9 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await signIn('credentials', loginInfo)
+    await signIn('credentials', { redirect: false, ...loginInfo }).then(() =>
+      router.push('/')
+    )
   }
 
   return (
@@ -106,17 +108,10 @@ const SignIn = () => {
 export default SignIn
 export async function getServerSideProps(context) {
   const { req } = context
-  console.log(req.headers.host)
   const session = await getSession({ req })
-  const providers = await getProviders()
-  if (session) {
-    return {
-      redirect: { destination: '/', parmanent: false }
-    }
-  }
+
   return {
     props: {
-      providers,
       session
     }
   }

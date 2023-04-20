@@ -9,6 +9,10 @@ import options from '../data/captec.json'
 
 export default function Home({ sessionData }) {
   const router = useRouter()
+  const { session } = sessionData
+  if (!session) {
+    router.replace('/auth/login')
+  }
 
   const { nombre_completo } = sessionData.user.data
 
@@ -78,14 +82,6 @@ export async function getServerSideProps(context) {
   const { req } = context
   const session = await getSession({ req })
   const sessionData = await session
-  if (!session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/auth/signin'
-      }
-    }
-  }
   return {
     props: {
       sessionData
