@@ -9,13 +9,8 @@ import options from '../data/captec.json'
 
 export default function Home({ sessionData }) {
   const router = useRouter()
-  const { session } = sessionData
 
-  useEffect(() => {
-    if (session === null && router.pathname !== '/auth/signin') {
-      router.replace('/auth/signin')
-    }
-  }, [session, router])
+  const { nombre_completo } = sessionData.user.data
 
   const [filter, setFilter] = useState({})
 
@@ -41,55 +36,53 @@ export default function Home({ sessionData }) {
     }
   }
 
-  if (session) {
-    const { nombre_completo, num_emp } = session.user.data
-    return (
-      <Layout title={'Inicio'}>
-        <div className='w-full flex flex-col gap-2 p-4 items-center'>
-          <div>Bienvenido: {nombre_completo}</div>
-          <form
-            onSubmit={handleSubmit}
-            className='w-full grid grid-rows-1 gap-2'
-          >
-            <input
-              type='text'
-              onChange={handleChange}
-              placeholder={'Asesor Técnico'}
-              name='nombre'
-            />
-            <input
-              type='text'
-              onChange={handleChange}
-              placeholder={'Razón Social'}
-              name='rs'
-            />
-            <input
-              type='text'
-              onChange={handleChange}
-              placeholder={'Estado'}
-              name='estado'
-            />
-            <input
-              type='text'
-              onChange={handleChange}
-              placeholder={'RFN'}
-              name='rfn'
-            />
-            <Select options={options} />
-            <button type='submit'>Send it!</button>
-          </form>
-          {asesores ? JSON.stringify(asesores, null, 3) : <p>Sin resultados</p>}
-        </div>
-      </Layout>
-    )
-  }
+  return (
+    <Layout title={'Inicio'}>
+      <div className='w-full flex flex-col gap-2 p-4 items-center'>
+        <div>Bienvenido: {nombre_completo}</div>
+        <form onSubmit={handleSubmit} className='w-full grid grid-rows-1 gap-2'>
+          <input
+            type='text'
+            onChange={handleChange}
+            placeholder={'Asesor Técnico'}
+            name='nombre'
+          />
+          <input
+            type='text'
+            onChange={handleChange}
+            placeholder={'Razón Social'}
+            name='rs'
+          />
+          <input
+            type='text'
+            onChange={handleChange}
+            placeholder={'Estado'}
+            name='estado'
+          />
+          <input
+            type='text'
+            onChange={handleChange}
+            placeholder={'RFN'}
+            name='rfn'
+          />
+          <Select options={options} />
+          <button type='submit'>Send it!</button>
+        </form>
+        {asesores ? JSON.stringify(asesores, null, 3) : <p>Sin resultados</p>}
+      </div>
+    </Layout>
+  )
 }
 
 export async function getServerSideProps(context) {
   const { req } = context
   const session = await getSession({ req })
-  const sessionData = { session }
-
+  const sessionData = await session
+  if (!session) {
+    return {
+      redirect: { destination: '/api/auth/signin' }
+    }
+  }
   return {
     props: {
       sessionData
