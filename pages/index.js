@@ -12,7 +12,7 @@ export default function Home({ sessionData }) {
   const { session } = sessionData
 
   useEffect(() => {
-    if (session === null) {
+    if (session === null && router.pathname !== '/auth/signin') {
       router.replace('/auth/signin')
     }
   }, [session, router])
