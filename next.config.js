@@ -3,8 +3,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/docs',
+        source: 'localhost:3000',
+        destination: '/',
         basePath: false,
         permanent: false
       }
