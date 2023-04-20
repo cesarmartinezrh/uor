@@ -7,7 +7,8 @@ export default function Navbar() {
 
   const handleSignOut = async (e) => {
     e.preventDefault()
-    signOut({ callbackUrl: 'https://uor.cnf.gob.mx/auth/signin' })
+    const getout = await signOut({ redirect: false })
+    console.log(getout)
   }
   return (
     <>
