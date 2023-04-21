@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: ''
+  basePath: '',
+  env: {
+    BASE_URL: 'https://uor.cnf.gob.mx'
+  }
 }
 
 module.exports = nextConfig
