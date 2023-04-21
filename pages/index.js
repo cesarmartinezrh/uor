@@ -40,6 +40,9 @@ export default function Home() {
       })
       const data = await response.json()
       setAsesores(data)
+      if (data.length < 1) {
+        setError('Sin resultados')
+      }
     } catch (error) {
       console.error(error)
     }
@@ -98,6 +101,7 @@ export default function Home() {
           </form>
 
           {asesores.length > 0 ? <Table data={asesores} /> : null}
+          {error !== null ? <p>{error}</p> : null}
         </div>
       </Layout>
     )
