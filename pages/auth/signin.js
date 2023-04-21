@@ -110,16 +110,16 @@ const SignIn = () => {
                 >
                   Ingresar
                 </button>
-                <p className='py-4 font-normal text-center text-slate-600 md:mt-0 text-sm'>
+                <p className='py-2 font-normal text-center text-slate-600 md:mt-0 text-sm'>
                   Ingrese su usuario sin @conafor.gob.mx
                 </p>
               </div>
-              {error ? (
-                <div className='w-full px-4 py-2 text-md text-center'>
-                  <span className='text-red-400 p-1 font-bold'>{error}</span>
-                </div>
-              ) : null}
             </form>
+            {error ? (
+              <div className='w-full text-md text-center'>
+                <span className='text-red-400 p-1 font-bold'>{error}</span>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
