@@ -34,7 +34,7 @@ const SignIn = () => {
       password
     })
     if (result?.error) {
-      alert(result.error)
+      setError('Credenciales inválidas')
     }
   }
 
@@ -110,6 +110,9 @@ const SignIn = () => {
                 >
                   Ingresar
                 </button>
+                <p className='py-4 font-normal text-center text-slate-600 md:mt-0 text-sm'>
+                  Ingrese su usuario sin @conafor.gob.mx
+                </p>
               </div>
               {error ? (
                 <div className='w-full px-4 py-2 text-md text-center'>

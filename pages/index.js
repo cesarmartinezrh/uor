@@ -15,7 +15,6 @@ export default function Home() {
   const [asesores, setAsesores] = useState([])
   const [error, setError] = useState(null)
   const session = useSession()
-  console.log(asesores)
 
   useEffect(() => {
     if (session.status === 'unauthenticated') {
@@ -59,7 +58,7 @@ export default function Home() {
     return (
       <Layout title={'Inicio'}>
         <div className='w-full flex flex-col gap-2 p-4 items-center'>
-          <div>Bienvenido: {session?.data?.user?.data.nombre_completo}</div>
+          <div>{`Bienvenida(o) ${session?.data?.user?.data.nombre_completo}`}</div>
           <form onSubmit={handleSubmit} className='flex w-full gap-2'>
             <div className='w-full grid grid-cols-1 gap-4 place-items-center xl:grid-cols-3'>
               {searchInputs.map((input) => (
