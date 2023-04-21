@@ -13,7 +13,12 @@ export default function Navbar() {
     <>
       <nav className='flex px-4 items-center justify-between w-full bg-slate-50 shadow-md shadow-slate-400 h-14'>
         <h1 className='text-4xl font-extrabold'>UOR</h1>
-        <Link rel='' type='' href='/asesores-tecnicos'>
+        <Link
+          className={'text-xl font-bold'}
+          rel=''
+          type=''
+          href='/asesores-tecnicos'
+        >
           Asesores técnicos
         </Link>
         <button
