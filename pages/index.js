@@ -40,6 +40,7 @@ export default function Home() {
       })
       const data = await response.json()
       setAsesores(data)
+      setError(null)
       if (data.length < 1) {
         setError('Sin resultados')
       }
