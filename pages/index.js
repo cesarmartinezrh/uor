@@ -95,8 +95,8 @@ export default function Home() {
                 name={'rfn'}
                 onChange={handleChange}
                 options={[
-                  { key: 'SI', description: 'si' },
-                  { key: 'NO', description: 'no' }
+                  { key: 'SI', description: 'SI' },
+                  { key: 'NO', description: 'NO' }
                 ]}
               />
               <button
