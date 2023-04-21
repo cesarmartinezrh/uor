@@ -8,7 +8,6 @@ export default function Navbar() {
   const handleSignOut = async (e) => {
     e.preventDefault()
     const getout = await signOut({ redirect: false })
-    console.log(getout)
   }
   return (
     <>

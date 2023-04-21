@@ -15,7 +15,6 @@ const SignIn = () => {
   const router = useRouter()
   if (status === 'authenticated') {
     router.replace('/')
-    console.log(router.query?.callbackUrl) ?? '/'
     return
   }
 

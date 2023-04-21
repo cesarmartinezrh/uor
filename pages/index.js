@@ -52,8 +52,7 @@ export default function Home() {
     const searchInputs = [
       { placeholder: 'Asesor técnico', name: 'rs' },
       { placeholder: 'Folio de asesor', name: 'folio' },
-      { placeholder: 'Representante Legal', name: 'nombre' },
-      { placeholder: 'RFN', name: 'rfn' }
+      { placeholder: 'Representante Legal', name: 'nombre' }
     ]
     return (
       <Layout title={'Inicio'}>
@@ -89,6 +88,15 @@ export default function Home() {
                 options={[
                   { key: 'fisica', description: 'FISICA' },
                   { key: 'moral', description: 'MORAL' }
+                ]}
+              />
+              <Select
+                selectName={'RFN'}
+                name={'rfn'}
+                onChange={handleChange}
+                options={[
+                  { key: 'SI', description: 'si' },
+                  { key: 'NO', description: 'no' }
                 ]}
               />
               <button
