@@ -59,7 +59,7 @@ export default function Home() {
       <Layout title={'Inicio'}>
         <div className='w-full flex flex-col gap-2 p-4 items-center'>
           <div>{`Bienvenida(o) ${session?.data?.user?.data.nombre_completo}`}</div>
-          <div>Fecha de actualización: 21 de abril 2023</div>
+          <div>Fecha de actualización: 26 de junio 2023</div>
           <form onSubmit={handleSubmit} className='flex w-full gap-2'>
             <div className='w-full grid grid-cols-1 gap-4 place-items-center xl:grid-cols-3'>
               {searchInputs.map((input) => (
